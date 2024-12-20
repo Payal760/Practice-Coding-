@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="runcode()">PLACE ORDER</button>
+</body>
+<script>
+    function runcode() {
+        placeOrder(800, paymentByGooglePay)
+
+    }
+    function placeOrder(amt, paymentMethod) {
+        let paymentStatus = paymentMethod(amt)
+        if (paymentStatus == true) {
+            console.log("order placed");
+        } else {
+            console.log("order failed");
+        }
+
+    }
+
+    function paymentByGooglePay(amt) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if (amt < 5000) {
+                    resolve()
+                } else {
+                    reject()
+                }
+            }, 3000)
+
+        })
+
+    }
+
+
+    
+</script>
+
+</html>

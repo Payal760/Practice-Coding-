@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .img {
+            border-radius: 50%;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            /* border: 2px solid black; */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            width: 50%;
+            margin: auto;
+            padding: 3%;
+            margin-top: 5%;
+
+        }
+
+        input {
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border: none;
+            padding: 2%;
+            font-size: 0.9rem;
+        }
+
+        input:hover {
+            /* color: rgb(150, 25, 25); */
+            background-color: rgb(248, 223, 199);
+            transition: 2s;
+
+        }
+
+        #btn {
+            background-color: rgb(245, 125, 94);
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        #btn:hover{
+            color: blue;
+            background-color: rgb(131, 175, 240);
+            transition: 2s;
+           
+
+        }
+        #removebtn{
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            padding: 2%;
+            color: black;
+            background-color: rgb(245, 125, 94);
+            transition: 2s;
+
+        }
+        #removebtn:hover{
+            color: blue;
+            background-color: rgb(131, 175, 240);
+            transition: 2s;
+           
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form" action="">
+        <input id="username" type="text" placeholder="Enter you name">
+        <input id="password" type="password" placeholder="Enter password">
+        <input id="email" type="email" placeholder="Enter email">
+        <input id="url" type="text" placeholder="enter url">
+        <input id="btn" type="submit" value="signup">
+
+        <div id="cont">
+
+        </div>
+        <button id="removebtn">remove</button>
+        <!-- <button id="runbtn">run</button> -->
+    </form>
+</body>
+<script>
+
+    let form = document.getElementById("form")
+    form.addEventListener("submit", function () {
+        event.preventDefault()
+        let name = form.username.value
+        let password = form.password.value
+        let email = form.email.value
+        let url = form.url.value
+        let userObj = { name, password, email, url }
+        console.log(userObj)
+        localStorage.setItem("userData", JSON.stringify(userObj))
+    })
+    appendData()
+
+    function appendData() {
+        let data = JSON.parse(localStorage.getItem("userData"))
+        // console.log(data)
+        if (data == null) {
+            alert("No user Found")
+        } else {
+            let nameTag = document.createElement("h3");
+            nameTag.textContent = `Name: ${data.name}`
+            nameTag.style.color = "blue"
+
+            let emailTag = document.createElement("h3")
+            emailTag.textContent = `Email: ${data.email}`
+            emailTag.style.color = "blue"
+
+            let img = document.createElement("img")
+            img.src = data.url
+            img.setAttribute("class", "img")
+
+            let content = document.getElementById("cont")
+            content.append(img, nameTag, emailTag)
+        }
+    }
+    let removebtn = document.getElementById("removebtn");
+    removebtn.addEventListener("click", function () {
+        let content = document.getElementById("cont")
+        content.remove()
+    })
+    let runbtn = document.getElementById("runbtn");
+    runbtn.addEventListener("click", function () {
+        let obj = { name: "payal", age: 24 }
+        let ans = JSON.stringify(obj)
+        let ans2 = JSON.parse(ans)
+        console.log(ans)
+        console.log(ans2)
+
+    })
+
+
+
+
+
+</script>
+
+</html>
